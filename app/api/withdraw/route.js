@@ -1,10 +1,7 @@
 import { admin, getUserFromRequest } from "@/lib/supabaseAdmin";
 
-<<<<<<< HEAD
 export const dynamic = "force-dynamic";
 
-=======
->>>>>>> 9cfbcb7a987694c9cb12734e3b71c223be00bcdb
 export async function POST(req) {
   const user = await getUserFromRequest(req);
   if (!user) return Response.json({ error: "login করুন" }, { status: 401 });
