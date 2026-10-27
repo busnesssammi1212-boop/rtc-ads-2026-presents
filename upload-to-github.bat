@@ -59,18 +59,19 @@ if errorlevel 1 (
 )
 
 echo.
-echo Syncing with GitHub...
-git pull origin %BRANCH% --allow-unrelated-histories --no-edit
-
-echo.
 echo Pushing...
 git push -u origin %BRANCH%
 if errorlevel 1 (
   echo.
-  echo Push failed. Check: 1^) GitHub login popup was completed, 2^) your account can write to the repo.
-  echo If the repo already has different files and you want to REPLACE them, run:  git push -u origin %BRANCH% --force
-  pause
-  exit /b 1
+  echo Normal push was rejected because GitHub has other files from a web upload.
+  echo Your local folder is the correct one, so replacing GitHub with it now...
+  git push -u origin %BRANCH% --force
+  if errorlevel 1 (
+    echo.
+    echo Push failed. Check: 1^) the GitHub login popup was completed, 2^) your account can write to the repo.
+    pause
+    exit /b 1
+  )
 )
 
 echo.
